@@ -1,0 +1,65 @@
+@startuml
+
+class Fabrica {
+  +nombre: String
+  +ubicacion: String
+  +iniciarProduccion()
+  +detenerProduccion()
+}
+
+class EstacionDeTrabajo {
+  +id: int
+  +tipoComponente: String
+  +iniciarTrabajo()
+  +detenerTrabajo()
+  +producirComponente()
+}
+
+class LineaDeProduccion {
+  +id: int
+  +estado: String
+  +velocidadProduccion: float
+  +ensamblarCampana()
+  +iniciarLinea()
+  +detenerLinea()
+}
+
+class Componente {
+  +id: int
+  +tipo: String
+  +calidad: String
+  +verificarCalidad()
+}
+
+class Base
+class Estructura
+class Sensor
+
+class CampanaDeGauss {
+  +id: int
+  +configuracion: String
+  +simularCampo()
+  +calcularDistribucion()
+}
+
+class Trabajador {
+  +nombre: String
+  +id: int
+  +rol: String
+  +operarMaquina()
+  +supervisarCalidad()
+}
+
+Fabrica "1" --> "n" EstacionDeTrabajo
+Fabrica "1" --> "1" LineaDeProduccion
+EstacionDeTrabajo "n" --> "n" Trabajador
+EstacionDeTrabajo "1" --> "n" Componente
+LineaDeProduccion "1" --> "n" Componente
+LineaDeProduccion "1" --> "n" CampanaDeGauss
+
+Componente <|-- Base
+Componente <|-- Estructura
+Componente <|-- Sensor
+CampanaDeGauss "1" --> "n" Componente
+
+@enduml
