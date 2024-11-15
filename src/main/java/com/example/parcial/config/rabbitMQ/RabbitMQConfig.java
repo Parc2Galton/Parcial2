@@ -1,4 +1,4 @@
-package com.example.parcial.RabbitMQ;
+package com.example.parcial.config.rabbitMQ;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +16,6 @@ public class RabbitMQConfig {
     public Queue queueB() {
         return new Queue("queueB", false);
     }
-
     @Bean
     public Queue queueC() {
         return new Queue("queueC", false);
