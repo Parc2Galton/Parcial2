@@ -1,27 +1,25 @@
 @startuml
-
 start
-:Fabrica inicia Producción;
+:Seleccionar número total de bolas;
+:Inicializar producción en la fábrica;
+:Crear tablero de Galton (niveles, contenedores);
+:Configurar contenedores;
+:Simular caída de bolas;
 
-:Verificar disponibilidad de estaciones y trabajadores;
-:Asignar tareas;
+repeat
+    :Procesar trayectoria de cada bola;
+    :Asignar bola a un contenedor;
+repeat while (bolas restantes > 0)
 
-fork
-  :Estación de Trabajo produce Componente;
-end fork
-
-:Transportar componentes a la Línea de Producción;
-
-:Verificar componentes;
-:Ensamblar Campana de Gauss;
-
-if (Calidad Aprobada?) then (Sí)
-  :Simular fenómeno de Gauss;
-  :Marcar Campana como lista;
+:Recolectar resultados de la simulación;
+:Validar distribución de bolas;
+if (¿Distribución válida?) then (Sí)
+    :Ensamblar máquina con componentes;
+    :Calcular eficiencia de la máquina;
+    :Generar reporte de producción;
 else (No)
-  :Retornar a Producción de Componentes;
+    :Reiniciar simulación;
 endif
-
+:Finalizar producción;
 stop
-
 @enduml

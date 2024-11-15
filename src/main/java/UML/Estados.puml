@@ -1,11 +1,13 @@
 @startuml
-
-[*] --> EsperandoComponentes
-
-EsperandoComponentes --> EnsamblajeEnProceso : todos los componentes listos
-EnsamblajeEnProceso --> PruebaDeCalidad : ensamblaje completado
-PruebaDeCalidad --> Completado : calidad aprobada
-PruebaDeCalidad --> ErrorEnProduccion : falla en calidad
-ErrorEnProduccion --> EnsamblajeEnProceso : corrección completada
-
+[*] --> Inicializando
+Inicializando --> ConfigurandoTablero : Configurar niveles y contenedores
+ConfigurandoTablero --> SimulandoCaida : Preparación completada
+SimulandoCaida --> RecolectandoResultados : Bolas distribuidas
+RecolectandoResultados --> ValidandoDistribucion : Resultados generados
+ValidandoDistribucion --> EnsamblandoMaquina : Distribución válida
+ValidandoDistribucion --> SimulandoCaida : Reiniciar si no es válida
+EnsamblandoMaquina --> CalculandoEficiencia : Componentes ensamblados
+CalculandoEficiencia --> GenerandoReporte : Eficiencia calculada
+GenerandoReporte --> Finalizado : Reporte generado
+Finalizado --> [*]
 @enduml

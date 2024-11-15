@@ -1,24 +1,32 @@
 @startuml
-
-actor Usuario as usuario
-participant Fabrica
-participant EstacionDeTrabajo
-participant Trabajador
-participant Componente
-participant LineaDeProduccion
-participant CampanaDeGauss
-
-usuario -> Fabrica: iniciarProduccion()
-Fabrica -> LineaDeProduccion: iniciarLinea()
-Fabrica -> EstacionDeTrabajo: iniciarTrabajo()
-
-EstacionDeTrabajo -> Trabajador: operarMaquina()
-Trabajador -> Componente: producirComponente()
-
-Componente -> LineaDeProduccion: enviarComponente()
-
-LineaDeProduccion -> CampanaDeGauss: ensamblarCampana()
-CampanaDeGauss -> LineaDeProduccion: verificarCalidad()
-CampanaDeGauss -> usuario: campana lista y verificada
-
+actor Usuario
+Usuario -> Fabrica : iniciarProduccion(totalBolas)
+activate Fabrica
+Fabrica -> TableroGalton : crearTablero(niveles, contenedores)
+activate TableroGalton
+TableroGalton -> Contenedor : inicializarContenedores()
+activate Contenedor
+Contenedor --> TableroGalton : contenedoresInicializados
+deactivate Contenedor
+Fabrica -> TableroGalton : simularCaida(totalBolas)
+loop por cada bola
+    TableroGalton -> Bola : calcularTrayectoria()
+    activate Bola
+    Bola --> TableroGalton : trayectoriaCalculada
+    deactivate Bola
+    TableroGalton -> Contenedor : asignarBola(contenedorId)
+    activate Contenedor
+    Contenedor --> TableroGalton : bolaAsignada
+    deactivate Contenedor
+end
+TableroGalton --> Fabrica : resultadosSimulacion
+deactivate TableroGalton
+Fabrica -> Maquina : ensamblarComponentes(distribucion)
+activate Maquina
+Maquina --> Fabrica : maquinaEnsamblada
+deactivate Maquina
+Fabrica -> Fabrica : calcularEficiencia()
+Fabrica -> Fabrica : generarReporte()
+Fabrica --> Usuario : reporteProduccion
+deactivate Fabrica
 @enduml
