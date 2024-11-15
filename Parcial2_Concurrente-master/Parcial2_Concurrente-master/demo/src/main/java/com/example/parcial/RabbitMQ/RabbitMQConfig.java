@@ -11,6 +11,7 @@ public class RabbitMQConfig {
     public Queue queueA() {
         return new Queue("queueA", false);
     }
+
     @Bean
     public Queue queueB() {
         return new Queue("queueB", false);

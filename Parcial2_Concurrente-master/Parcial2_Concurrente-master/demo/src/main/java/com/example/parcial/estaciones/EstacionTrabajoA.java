@@ -4,6 +4,7 @@ import com.example.parcial.RabbitMQ.RabbitMQService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 @Component
 public class EstacionTrabajoA {
@@ -12,8 +13,8 @@ public class EstacionTrabajoA {
     private RabbitMQService rabbitMQService;
 
     public Mono<String> producirComponenteA() {
-        return rabbitMQService.receiveMessage("queueA")
-                .flatMap(componenteA -> Mono.just("Componente B producido")
-                        .flatMap(componenteB -> rabbitMQService.sendMessage("queueB", componenteB).thenReturn(componenteB)));
+        return Mono.just("Componente A producido")
+                .flatMap(componenteA -> rabbitMQService.sendMessage("queueA", componenteA).thenReturn(componenteA))
+                .subscribeOn(Schedulers.parallel());
     }
 }
