@@ -1,0 +1,59 @@
+@startuml
+package dominio {
+    class Fabrica {
+        +iniciarProduccion(totalBolas: int): Maquina
+        +simularTableroGalton(bolas: int): Map<String, Integer>
+        +ensamblarComponentes(distribucion: Map<String, Integer>): Maquina
+        -idContenedores: List<UUID>
+        -idTableroGalton: UUID
+        -idFabrica: UUID
+        -nombreProduccion: String
+        -fechaProduccion: LocalDateTime
+    }
+
+    class Maquina {
+        +agregarComponentes(componentes: Map<String, Integer>): void
+        +obtenerDistribucion(): Map<String, Integer>
+        +calcularEficiencia(): double
+        +generarInforme(): String
+        -componentes: Map<String, Integer>
+        -eficiencia: double
+        -idMaquina: UUID
+    }
+
+    class Contenedor {
+        +agregarBola(): void
+        +obtenerNumeroDeBolas(): int
+        +reiniciarConteo(): void
+        +obtenerNombre(): String
+        -numeroDeBolas: int
+        -nombre: String
+        -idContenedor: UUID
+    }
+
+    class TableroGalton {
+        +simularCaida(bolas: int): void
+        +obtenerResultados(): Map<String, Integer>
+        +inicializarTablero(niveles: int, nombresContenedores: List<String>): void
+        -numeroDeNiveles: int
+        -idContenedores: List<UUID>
+        -idTablero: UUID
+    }
+
+    class Bola {
+        +obtenerRecorrido(): List<Integer>
+        +calcularContenedorFinal(): String
+        -recorridoActual: List<Integer>
+        -contenedorFinal: String
+        -idBola: UUID
+    }
+
+    Fabrica --> TableroGalton : "usa (idTableroGalton)"
+    Fabrica --> Contenedor : "gestiona (idContenedores)"
+    Fabrica --> Maquina : "ensambla"
+    TableroGalton --> Contenedor : "distribuye (idContenedores)"
+    TableroGalton --> Bola : "simula trayectoria"
+    Maquina --> Contenedor : "usa datos (idContenedores)"
+    Contenedor --> Bola : "acumula"
+}
+@enduml
