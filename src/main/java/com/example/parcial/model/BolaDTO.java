@@ -2,9 +2,7 @@ package com.example.parcial.model;
 
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -12,6 +10,8 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class BolaDTO {
     @NotNull
     private UUID idBola;
