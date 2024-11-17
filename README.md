@@ -1,5 +1,5 @@
-# Simulación de Producción Concurrente con Spring Boot WebFlux y RabbitMQ en la Fábrica de Campanas de Gauss (Trabajo realizado por Juan Manuel Rodriguez, Pablo Alonso y francisco carlos lopez soto)
-
+# Simulación de Producción Concurrente con Spring Boot WebFlux y RabbitMQ en la Fábrica de Campanas de Gauss (Trabajo realizado por Juan Manuel Rodriguez, Pablo Alonso y Francisco López Soto)
+Link al repositorio: https://github.com/orgs/Parc2Galton/repositories , https://github.com/Parc2Galton
 ## Descripción del Proyecto
 Este proyecto simula el proceso de fabricación de la "Máquina de la Distribución Normal", inspirada en el histórico tablero de Galton. Utilizando **Spring Boot WebFlux** y **RabbitMQ**, se modelan las estaciones de trabajo de una fábrica para demostrar conceptos de concurrencia, sincronización y programación distribuida.
 
