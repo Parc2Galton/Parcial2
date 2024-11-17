@@ -10,12 +10,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-import java.util.stream.IntStream;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @SpringBootApplication
+@RestController
 public class Parcial2Application {
+
+	private final FabricaService fabricaService;
+
+	public Parcial2Application(FabricaService fabricaService) {
+		this.fabricaService = fabricaService;
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(Parcial2Application.class, args);
@@ -46,16 +53,6 @@ public class Parcial2Application {
 					.doOnError(error -> System.err.println("Error durante la producción: " + error.getMessage()))
 					.subscribe();
 		};
-	}
-}
-
-@RestController
-class SimulacionController {
-
-	private final FabricaService fabricaService;
-
-	public SimulacionController(FabricaService fabricaService) {
-		this.fabricaService = fabricaService;
 	}
 
 	@GetMapping("/simularProduccion")

@@ -172,7 +172,7 @@
                 <version>1.15.0</version>
                 <executions>
                     <execution>
-                        <id>nodeAndNpmSetup</id>
+                        <id>install-node-and-npm</id>
                         <goals>
                             <goal>install-node-and-npm</goal>
                         </goals>
@@ -197,7 +197,9 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <workingDirectory>${project.basedir}</workingDirectory>
                     <nodeVersion>v20.17.0</nodeVersion>
+                    <npmVersion>9.8.1</npmVersion>
                 </configuration>
             </plugin>
         </plugins>
